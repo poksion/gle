@@ -11,6 +11,6 @@ public class WordFilterNaiveTest {
     @Test
     public void testWordFilterNaive(){
         WordFilter filter = new WordFilterNaive();
-        assertTrue(filter.inFilterList(new Word("은", Word.LANG.KO)));
+        assertNull(filter.refineWord(new Word("은", Word.LANG.KO)));
     }
 }

@@ -10,12 +10,16 @@ import java.util.List;
 import net.poksion.gle.utils.FileUtils;
 import net.poksion.gle.word.WordCountInfo;
 import net.poksion.gle.word.filter.WordFilter;
+import net.poksion.gle.word.filter.WordFilterKO;
 import net.poksion.gle.word.filter.WordFilterNaive;
+import net.poksion.gle.word.filter.WordFilterRepresentative;
 
 public class SectionBuilder {
 
     public static void main(String[] args) {
-        WordFilter wordFilter = new WordFilterNaive();
+        WordFilter wordFilter = new WordFilterRepresentative(
+                                    new WordFilterKO(
+                                        new WordFilterNaive() ));
         Section section = new Section(wordFilter);
 
         if(args.length == 1){

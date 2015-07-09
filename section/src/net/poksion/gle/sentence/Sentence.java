@@ -33,8 +33,9 @@ public class Sentence {
                 wordStr = wordStr.toLowerCase();
                 lang = Word.LANG.EN;
             }
-            Word word = new Word(wordStr, lang);
-            if(wordFilter == null || !wordFilter.inFilterList(word)){
+
+            Word word = WordFilter.makeFilteredWord(wordFilter, wordStr, lang);
+            if(word != null){
                 words.add(word);
             }
         }
