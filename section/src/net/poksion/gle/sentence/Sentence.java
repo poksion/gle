@@ -1,9 +1,12 @@
-package net.poksion.gle.section;
+package net.poksion.gle.sentence;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.poksion.gle.word.Word;
+import net.poksion.gle.word.filter.WordFilter;
 
 public class Sentence {
 
@@ -15,7 +18,7 @@ public class Sentence {
         value = sentenceStr;
     }
 
-    public void parse(){
+    public void parse(WordFilter wordFilter){
         if(value == null || parsed){
             return;
         }
@@ -31,7 +34,9 @@ public class Sentence {
                 lang = Word.LANG.EN;
             }
             Word word = new Word(wordStr, lang);
-            words.add(word);
+            if(wordFilter == null || !wordFilter.inFilterList(word)){
+                words.add(word);
+            }
         }
 
         parsed = true;
@@ -39,6 +44,11 @@ public class Sentence {
 
     public boolean isParsed(){
         return parsed;
+    }
+
+    public void clearParsed(){
+        words.clear();
+        parsed = false;
     }
 
     public String getValue() {

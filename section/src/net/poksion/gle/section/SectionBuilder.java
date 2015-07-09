@@ -8,11 +8,15 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import net.poksion.gle.utils.FileUtils;
+import net.poksion.gle.word.WordCountInfo;
+import net.poksion.gle.word.filter.WordFilter;
+import net.poksion.gle.word.filter.WordFilterNaive;
 
 public class SectionBuilder {
 
     public static void main(String[] args) {
-        Section section = new Section();
+        WordFilter wordFilter = new WordFilterNaive();
+        Section section = new Section(wordFilter);
 
         if(args.length == 1){
             String directoryPath = args[0];
@@ -54,12 +58,11 @@ public class SectionBuilder {
     }
 
     private static void buildSectionOnSentenceAdded(Section section, String line){
-        Sentence sentence = section.addSentence(line);
-        sentence.parse();
+        section.addSentence(line, true);
     }
 
     private static void printWordCountInfo(Section section){
-        for(Word.CountInfo info : section.getWordCountInfo()){
+        for(WordCountInfo info : section.getWordCountInfo()){
             System.out.println(info.word.getValue() + " : " + info.count);
         }
     }

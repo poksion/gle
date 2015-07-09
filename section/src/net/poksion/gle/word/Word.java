@@ -1,4 +1,4 @@
-package net.poksion.gle.section;
+package net.poksion.gle.word;
 
 public class Word {
 
@@ -46,28 +46,5 @@ public class Word {
         }
 
         return value.hashCode();
-    }
-
-    public static class CountInfo implements Comparable<CountInfo> {
-        public Word word;
-        public int count;
-
-        @Override
-        public int compareTo(CountInfo o) {
-            if(count == o.count) {
-                if(word.value == null || o.word.value == null){
-                    return 0;
-                }
-                return word.value.compareTo(o.word.value);
-            }
-
-            // 앞 객체의 count가 더 클때 뒤로 보내고 싶지 않으므로 -1
-            // cf. 뒤로 보내고 싶다면 1 (positive)을 리턴한다.
-            if(count > o.count) {
-                return -1;
-            }
-
-            return 1;
-        }
     }
 }
