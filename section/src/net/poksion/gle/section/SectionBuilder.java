@@ -66,8 +66,11 @@ public class SectionBuilder {
     }
 
     private static void printWordCountInfo(Section section){
+        int totalCnt = 0;
         for(WordCountInfo info : section.getWordCountInfo()){
+            totalCnt += info.count;
             System.out.println(info.word.getValue() + " : " + info.count);
         }
+        System.out.println("Total word count : " + totalCnt);
     }
 }
